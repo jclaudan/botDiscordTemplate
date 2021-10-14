@@ -1,0 +1,19 @@
+{
+  "name": "bottemplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "base.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node base.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.23.0",
+    "cheerio": "^1.0.0-rc.10",
+    "discord-command-parser": "^1.5.3",
+    "discord.js": "^12.3.1",
+    "luxon": "^2.0.2"
+  }
+}
