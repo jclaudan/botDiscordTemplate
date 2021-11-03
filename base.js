@@ -47,28 +47,28 @@ client.login(token);
 const commands = [
 	new SlashCommandBuilder().setName('mute')
         .setDescription('Mute a target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
+        .addUserOption(option => option.getMentionable('target').setDescription('Select a user'))
         .addStringOption(option => option.setName('time').setDescription('Enter a string like 10s or 1h'))
         .addStringOption(option => option.setName('reason').setDescription('Explaint your reason my son')),
 
 	new SlashCommandBuilder().setName('unmute')
         .setDescription('Unmute a target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
+        .addUserOption(option => option.getMentionable('target').setDescription('Select a user'))
         .addStringOption(option => option.setName('reason').setDescription('Explaint your reason my son')),
 
 	new SlashCommandBuilder().setName('warn')
         .setDescription('Set a warning for target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
+        .addUserOption(option => option.getMentionable('target').setDescription('Select a user'))
         .addStringOption(option => option.setName('reason').setDescription('Explaint your reason my son')),
 
     new SlashCommandBuilder().setName('kick')
         .setDescription('Set a warning for target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
+        .addUserOption(option => option.getMentionable('target').setDescription('Select a user'))
         .addStringOption(option => option.setName('reason').setDescription('Explaint your reason my son')),
 
     new SlashCommandBuilder().setName('ban')
         .setDescription('Set a warning for target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
+        .addUserOption(option => option.getMentionable('target').setDescription('Select a user'))
         .addStringOption(option => option.setName('reason').setDescription('Explaint your reason my son')),
 
 ].map(command => command.toJSON());
