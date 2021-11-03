@@ -18,6 +18,8 @@ const ms = require('ms');
 // Require the necessary discord.js classes
 // const { token } = require('./config.json');
 
+const defaultTimeMute = '30s';
+
 // Create a new client instance
 const client = new Client({ 
     intents: [
@@ -113,7 +115,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
                 const unmute = new MessageEmbed()
                     .setColor("#00aaaa")
                     .setDescription(`${user} has been unmuted.`);
-                interaction.reply({ embeds: [unmute] });
+                interaction.deferReply({ embeds: [unmute] });
             }, ms(time));
 
 
@@ -165,7 +167,6 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
         // console.log('interaction.member;;', interaction.member.guild.members);
     });
 
-const defaultTimeMute = '30s';
 const manageMembers = async (message) => {
     const isBotDirectMessageType = message.author.bot || message.channel.type === 'dm';
     if (isBotDirectMessageType)
