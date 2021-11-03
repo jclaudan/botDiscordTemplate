@@ -106,14 +106,14 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
                 .setColor("#00aaaa")
                 .setDescription(`${user} has been muted by ${interaction.user.username} for ${ms(ms(time))}.\nReason: **${reason != "" ? reason : "-"}**`);
 
-            interaction.message.channel.send({ embeds: [embed] });
+            interaction.reply({ embeds: [embed] });
 
             setTimeout(async () => {
                 await memberVoiceState.setMute(false, reason)
                 const unmute = new MessageEmbed()
                     .setColor("#00aaaa")
                     .setDescription(`${user} has been unmuted.`);
-                interaction.message.channel.send({ embeds: [unmute] });
+                interaction.reply({ embeds: [unmute] });
             }, ms(time));
 
 
