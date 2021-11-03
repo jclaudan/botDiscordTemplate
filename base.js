@@ -95,15 +95,15 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
         if (!interaction.isCommand()) return;
         const { commandName, memberPermissions } = interaction;
         if (commandName === 'mute') {
-            await mute(interaction)
+            await mute(interaction, memberPermissions)
         } else if (commandName === 'unmute') {
-            await unmute(interaction)
+            await unmute(interaction, memberPermissions)
         } else if (commandName === 'warn') {
-           await warn(interaction)
+           await warn(interaction, memberPermissions)
         } else if (commandName === 'kick') {
-            await kick(interaction)
+            await kick(interaction, memberPermissions)
         } else if (commandName === 'ban') {
-            await ban(interaction)
+            await ban(interaction, memberPermissions)
         }
         
     });

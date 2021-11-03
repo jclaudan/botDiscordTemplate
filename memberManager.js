@@ -1,7 +1,7 @@
 const { MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
 const defaultTimeMute = '30s';
 
-const mute = async (interaction) => {
+const mute = async (interaction, memberPermissions) => {
     const reason = interaction.options.getString('reason');
     let time = interaction.options.getString('time');
 
@@ -33,7 +33,7 @@ const mute = async (interaction) => {
     }, ms(time));
 }
 
-const unmute = async (interaction) => {
+const unmute = async (interaction, memberPermissions) => {
     const reason = interaction.options.getString('reason');
 
     if (!memberPermissions.has(Permissions.FLAGS.MUTE_MEMBERS))
@@ -53,7 +53,7 @@ const unmute = async (interaction) => {
 
 }
 
-const warn = async (interaction) => {
+const warn = async (interaction, memberPermissions) => {
     const reason = interaction.options.getString('reason');
 
     if (!memberPermissions.has(Permissions.FLAGS.MUTE_MEMBERS))
@@ -102,7 +102,7 @@ const warn = async (interaction) => {
     });
 }
 
-const kick = async (interaction) => {
+const kick = async (interaction, memberPermissions) => {
     const reason = interaction.options.getString('reason');
 
     if (!memberPermissions.has("KICK_MEMBERS"))
@@ -121,7 +121,7 @@ const kick = async (interaction) => {
     await interaction.reply({ embeds: [kickmessage] });
 }
 
-const ban = async (interaction) => {
+const ban = async (interaction, memberPermissions) => {
     const reason = interaction.options.getString('reason');
 
     if (!memberPermissions.has("BAN_MEMBERS"))
