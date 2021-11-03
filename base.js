@@ -143,6 +143,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
                 await interaction.reply({ embeds: [unmute] });
         
         } else if (commandName === 'warn') {
+            const reason = interaction.options.getString('reason');
 
             if (!memberPermissions.has(Permissions.FLAGS.MUTE_MEMBERS))
                 return interaction.reply("You do not have permission to do that.");
@@ -190,6 +191,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
             });
 
         } else if (commandName === 'kick') {
+            const reason = interaction.options.getString('reason');
 
             if (!memberPermissions.has("KICK_MEMBERS"))
                 return interaction.reply("You do not have permission to do that.");
@@ -207,6 +209,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
             await interaction.reply({ embeds: [kickmessage] });
 
         } else if (commandName === 'ban') {
+            const reason = interaction.options.getString('reason');
 
             if (!memberPermissions.has("BAN_MEMBERS"))
                 return interaction.reply("You do not have permission to do that.");
