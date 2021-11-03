@@ -1,6 +1,8 @@
 const puppeteer = require('puppeteer');
 
 // https://www.backmarket.fr/search?q=iphone%2011&ga_search=iphone%2011
+// "puppeteer": "^10.4.0",
+// "cheerio": "^1.0.0-rc.10",
 
 const puppeteerFunction = async (goToUrl, message) => {
         const browser = await puppeteer.launch();
