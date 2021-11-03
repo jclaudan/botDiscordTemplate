@@ -131,7 +131,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
                 return interaction.reply("You do not have permission to do that.");
             const user = interaction.options.getUser('target');
             if (!user)
-                return message.reply("Please specify someone you want to unmute. **!unmute <user> [reason]**");
+                return interaction.reply("Please specify someone you want to unmute. **!unmute <user> [reason]**");
             const target = interaction.member.guild.members.cache.get(user.id);
 
             const memberVoiceState = target.guild.voiceStates.cache.get(target.id);
@@ -163,7 +163,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
                 const mute = new MessageEmbed()
                     .setColor("#00aaaa")
                     .setDescription(`${user} has been muted. (**3**/**3**)\nReason: **${reason != "" ? reason : "-"}**`);
-                    interaction.reply({ embeds: [mute] });
+                await interaction.reply({ embeds: [mute] });
 
                 const memberVoiceState = target.guild.voiceStates.cache.get(user.id)
                 await memberVoiceState.setMute(true, reason)
@@ -180,7 +180,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
             } else {
                 const warn = new MessageEmbed()
                     .setColor("#00aaaa")
-                    .setDescription(`${user} has been warned by ${message.author}. (**${warns[user.id].warnCount}**/**3**) \nReason: **${reason != "" ? reason : "-"}**`);
+                    .setDescription(`${user} has been warned by @${interaction.user.username}. (**${warns[user.id].warnCount}**/**3**) \nReason: **${reason != "" ? reason : "-"}**`);
                 await interaction.reply({ embeds: [warn] });
             }
 
@@ -209,19 +209,19 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
         } else if (commandName === 'ban') {
 
             if (!memberPermissions.has("BAN_MEMBERS"))
-                return message.reply("You do not have permission to do that.");
-            const user = message.mentions.users.first();
+                return interaction.reply("You do not have permission to do that.");
+            const user = interaction.options.getUser('target');
             if (!user)
-                return message.reply("Please specify someone you want to ban. **!ban <user> [reason]**");
-            if (user.id === message.author.id)
-                return message.reply("You cannot ban yourself.");
-            const reason = args.slice(1).join(" ");
-            message.guild.members.cache.get(user.id).ban({ reason: reason });
+                return interaction.reply("Please specify someone you want to ban. **!ban <user> [reason]**");
+            if (user.id === interaction.user.id)
+                return interaction.reply("You cannot ban yourself.");
+
+            await interaction.member.guild.members.cache.get(user.id).ban({ reason: reason });
 
             const banmessage = new MessageEmbed()
                 .setColor("#00aaaa")
                 .setDescription(`${user} has been banned. Reason: **${reason != "" ? reason : "-"}**`);
-            message.channel.send({ embeds: [banmessage] });
+            await interaction.reply({ embeds: [banmessage] });
         }
         
     });
