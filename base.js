@@ -99,7 +99,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 
             if (!memberPermissions.has(Permissions.FLAGS.MUTE_MEMBERS))
                 return interaction.reply("You do not have permission to do that.");
-            const user = interaction.options.getMentionable('target');
+            const user = interaction.options.getUser('target');
 
             if (!user)
                 return interaction.reply("Please specify someone you want to mute. **!mute <user> [time] [reason]**");
