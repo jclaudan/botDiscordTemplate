@@ -5,7 +5,8 @@
   "main": "base.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node base.js"
+    "start": "node base.js",
+    "serve": "nodemon --watch base.js"
   },
   "author": "",
   "license": "ISC",
