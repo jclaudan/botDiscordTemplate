@@ -1,4 +1,4 @@
-const { MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu } = require('discord.js');
+const {  MessageActionRow, MessageButton, MessageEmbed, Permissions } = require('discord.js');
 const defaultTimeMute = '30s';
 
 const mute = async (interaction, memberPermissions) => {
