@@ -13,7 +13,6 @@ const { clientId, guildId, token } = require('./config.js');
 const { selectMenuRow, buttonMessage, embedMessage } = require('./utils.js');
 const { mute, unmute, warn, kick, ban } = require('./memberManager.js');
 
-const warns = require("./warns.json");
 const fs = require('fs');
 const ms = require('ms');
 // Require the necessary discord.js classes
