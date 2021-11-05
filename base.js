@@ -60,18 +60,30 @@ const commands = [
 	new SlashCommandBuilder().setName('warn')
         .setDescription('Set a warning for target')
         .addUserOption(option => option.setName('t').setDescription('Select a user'))
-        .addStringOption(option => option.setName('reason').setDescription(reasonDescription)),
-
+        .addStringOption(option => option.setName('reason')
+            .setDescription(reasonDescription)
+            .addChoice('Level 0', 'Level 0')
+			.addChoice('Level 1', 'Level 1')
+			.addChoice('Level 2', 'Level 2')
+        ),
     new SlashCommandBuilder().setName('kick')
         .setDescription('Set a warning for target')
         .addUserOption(option => option.setName('t').setDescription('Select a user'))
-        .addStringOption(option => option.setName('reason').setDescription(reasonDescription)),
-
+        .addStringOption(option => option.setName('reason')
+            .setDescription(reasonDescription)
+            .addChoice('Level 0', 'Level 0')
+			.addChoice('Level 1', 'Level 1')
+			.addChoice('Level 2', 'Level 2')
+        ),
     new SlashCommandBuilder().setName('ban')
         .setDescription('Set a warning for target')
         .addUserOption(option => option.setName('t').setDescription('Select a user'))
-        .addStringOption(option => option.setName('reason').setDescription(reasonDescription)),
-
+        .addStringOption(option => option.setName('reason')
+            .setDescription(reasonDescription)
+            .addChoice('Level 0', 'Level 0')
+			.addChoice('Level 1', 'Level 1')
+			.addChoice('Level 2', 'Level 2')
+        ),
 ].map(command => command.toJSON());
 
 // const integer = interaction.options.getInteger('int');
