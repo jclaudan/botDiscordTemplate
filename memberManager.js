@@ -103,7 +103,7 @@ const warn = async (interaction, memberPermissions) => {
                 .setColor("#00aaaa")
                 .setDescription(`${user} has been unmuted.`);
             await interaction.followUp({ embeds: [unmute] });
-        }, ms(defaultTimeMute));
+        }, ms(defaultTimeMute(reason)));
 
     } else {
         const warn = new MessageEmbed()
