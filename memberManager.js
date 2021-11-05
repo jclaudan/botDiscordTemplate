@@ -19,7 +19,7 @@ const defaultTimeMute = (reason) => {
 
 const mute = async (interaction, memberPermissions) => {
     const reason = interaction.options.getString('reason');
-    let time = interaction.options.getString('time');
+    // let time = interaction.options.getString('time');
 
     if (!memberPermissions.has(Permissions.FLAGS.MUTE_MEMBERS))
         return interaction.reply("You do not have permission to do that.");
@@ -29,10 +29,10 @@ const mute = async (interaction, memberPermissions) => {
         return interaction.reply("Please specify someone you want to mute. **!mute <user> [time] [reason]**");
     const target = interaction.member.guild.members.cache.get(user.id);
 
-    if (!time)
-        time = defaultTimeMute(reason);
-        const memberVoiceState = target.guild.voiceStates.cache.get(target.id);
-        await memberVoiceState.setMute(true, reason)
+    // if (!time)
+    const time = defaultTimeMute(reason);
+    const memberVoiceState = target.guild.voiceStates.cache.get(target.id);
+    await memberVoiceState.setMute(true, reason)
 
     const embed = new MessageEmbed()
         .setColor("#00aaaa")

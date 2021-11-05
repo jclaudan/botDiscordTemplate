@@ -46,11 +46,11 @@ const commands = [
         .addUserOption(option => option.setName('t').setDescription('Select a user'))
         .addStringOption(option => option.setName('reason')
             .setDescription(reasonDescription)
-            .addChoice('Level 0', 'gif_funny')
-			.addChoice('Level 1', 'gif_meme')
-			.addChoice('Level 2', 'gif_movie')
-        )
-        .addStringOption(option => option.setName('time').setDescription('Enter a string like 10s or 1h')),
+            .addChoice('Level 0', 'Level 0')
+			.addChoice('Level 1', 'Level 1')
+			.addChoice('Level 2', 'Level 2')
+        ),
+        // .addStringOption(option => option.setName('time').setDescription('Enter a string like 10s or 1h')),
 
 	new SlashCommandBuilder().setName('unmute')
         .setDescription('Unmute a target')
