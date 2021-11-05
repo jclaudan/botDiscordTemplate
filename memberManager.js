@@ -4,7 +4,18 @@ const ms = require('ms');
 
 const warns = require("./warns.json");
 
-const defaultTimeMute = '30s';
+const defaultTimeMute = (reason) => {
+    if (reason === 'Level 0') {
+        return '10s'
+    }
+    if (reason === 'Level 1') {
+        return '30s'
+    }
+    if (reason === 'Level 2') {
+        return '60s'
+    }
+    return '30s'
+};
 
 const mute = async (interaction, memberPermissions) => {
     const reason = interaction.options.getString('reason');
@@ -12,14 +23,14 @@ const mute = async (interaction, memberPermissions) => {
 
     if (!memberPermissions.has(Permissions.FLAGS.MUTE_MEMBERS))
         return interaction.reply("You do not have permission to do that.");
-    const user = interaction.options.getUser('@');
+    const user = interaction.options.getUser('t');
 
     if (!user)
         return interaction.reply("Please specify someone you want to mute. **!mute <user> [time] [reason]**");
     const target = interaction.member.guild.members.cache.get(user.id);
 
     if (!time)
-        time = defaultTimeMute;
+        time = defaultTimeMute(reason);
         const memberVoiceState = target.guild.voiceStates.cache.get(target.id);
         await memberVoiceState.setMute(true, reason)
 
@@ -43,7 +54,7 @@ const unmute = async (interaction, memberPermissions) => {
 
     if (!memberPermissions.has(Permissions.FLAGS.MUTE_MEMBERS))
         return interaction.reply("You do not have permission to do that.");
-    const user = interaction.options.getUser('@');
+    const user = interaction.options.getUser('t');
     if (!user)
         return interaction.reply("Please specify someone you want to unmute. **!unmute <user> [reason]**");
     const target = interaction.member.guild.members.cache.get(user.id);
@@ -63,7 +74,7 @@ const warn = async (interaction, memberPermissions) => {
 
     if (!memberPermissions.has(Permissions.FLAGS.MUTE_MEMBERS))
         return interaction.reply("You do not have permission to do that.");
-    const user = interaction.options.getUser('@');
+    const user = interaction.options.getUser('t');
     if (!user)
         return interaction.reply("Please specify someone you want to warn. **!warn <user> [reason]**");
     const target = interaction.member.guild.members.cache.get(user.id);
@@ -112,7 +123,7 @@ const kick = async (interaction, memberPermissions) => {
 
     if (!memberPermissions.has("KICK_MEMBERS"))
         return interaction.reply("You do not have permission to do that.");
-    const user = interaction.options.getUser('@');
+    const user = interaction.options.getUser('t');
     if (!user)
         return interaction.reply("Please specify someone you want to kick. **!kick <user> [reason]**");
     if (user.id === interaction.user.id)
@@ -131,7 +142,7 @@ const ban = async (interaction, memberPermissions) => {
 
     if (!memberPermissions.has("BAN_MEMBERS"))
         return interaction.reply("You do not have permission to do that.");
-    const user = interaction.options.getUser('@');
+    const user = interaction.options.getUser('t');
     if (!user)
         return interaction.reply("Please specify someone you want to ban. **!ban <user> [reason]**");
     if (user.id === interaction.user.id)

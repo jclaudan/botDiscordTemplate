@@ -43,7 +43,7 @@ const reasonDescription = 'set the reason level with min 0 and max 5';
 const commands = [
 	new SlashCommandBuilder().setName('mute')
         .setDescription('Mute a target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
+        .addUserOption(option => option.setName('t').setDescription('Select a user'))
         .addStringOption(option => option.setName('reason')
             .setDescription(reasonDescription)
             .addChoice('Level 0', 'gif_funny')
@@ -54,22 +54,22 @@ const commands = [
 
 	new SlashCommandBuilder().setName('unmute')
         .setDescription('Unmute a target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
+        .addUserOption(option => option.setName('t').setDescription('Select a user'))
         .addStringOption(option => option.setName('reason').setDescription(reasonDescription)),
 
 	new SlashCommandBuilder().setName('warn')
         .setDescription('Set a warning for target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
+        .addUserOption(option => option.setName('t').setDescription('Select a user'))
         .addStringOption(option => option.setName('reason').setDescription(reasonDescription)),
 
     new SlashCommandBuilder().setName('kick')
         .setDescription('Set a warning for target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
+        .addUserOption(option => option.setName('t').setDescription('Select a user'))
         .addStringOption(option => option.setName('reason').setDescription(reasonDescription)),
 
     new SlashCommandBuilder().setName('ban')
         .setDescription('Set a warning for target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
+        .addUserOption(option => option.setName('t').setDescription('Select a user'))
         .addStringOption(option => option.setName('reason').setDescription(reasonDescription)),
 
 ].map(command => command.toJSON());
