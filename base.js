@@ -38,34 +38,34 @@ client.once('ready', () => {
 // Login to Discord with your client's token
 client.login(token);
 
-
+const reasonDescription = 'set the reason level with min 0 and max 5';
 
 const commands = [
 	new SlashCommandBuilder().setName('mute')
         .setDescription('Mute a target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
-        .addStringOption(option => option.setName('time').setDescription('Enter a string like 10s or 1h'))
-        .addStringOption(option => option.setName('reason').setDescription('Explaint your reason my son')),
+        .addUserOption(option => option.setName('@').setDescription('Select a user'))
+        .addStringOption(option => option.setName('reason').setDescription(reasonDescription))
+        .addStringOption(option => option.setName('time').setDescription('Enter a string like 10s or 1h')),
 
 	new SlashCommandBuilder().setName('unmute')
         .setDescription('Unmute a target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
-        .addStringOption(option => option.setName('reason').setDescription('Explaint your reason my son')),
+        .addUserOption(option => option.setName('@').setDescription('Select a user'))
+        .addStringOption(option => option.setName('reason').setDescription(reasonDescription)),
 
 	new SlashCommandBuilder().setName('warn')
         .setDescription('Set a warning for target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
-        .addStringOption(option => option.setName('reason').setDescription('Explaint your reason my son')),
+        .addUserOption(option => option.setName('@').setDescription('Select a user'))
+        .addStringOption(option => option.setName('reason').setDescription(reasonDescription)),
 
     new SlashCommandBuilder().setName('kick')
         .setDescription('Set a warning for target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
-        .addStringOption(option => option.setName('reason').setDescription('Explaint your reason my son')),
+        .addUserOption(option => option.setName('@').setDescription('Select a user'))
+        .addStringOption(option => option.setName('reason').setDescription(reasonDescription)),
 
     new SlashCommandBuilder().setName('ban')
         .setDescription('Set a warning for target')
-        .addUserOption(option => option.setName('target').setDescription('Select a user'))
-        .addStringOption(option => option.setName('reason').setDescription('Explaint your reason my son')),
+        .addUserOption(option => option.setName('@').setDescription('Select a user'))
+        .addStringOption(option => option.setName('reason').setDescription(reasonDescription)),
 
 ].map(command => command.toJSON());
 

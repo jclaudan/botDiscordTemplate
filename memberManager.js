@@ -12,7 +12,7 @@ const mute = async (interaction, memberPermissions) => {
 
     if (!memberPermissions.has(Permissions.FLAGS.MUTE_MEMBERS))
         return interaction.reply("You do not have permission to do that.");
-    const user = interaction.options.getUser('target');
+    const user = interaction.options.getUser('@');
 
     if (!user)
         return interaction.reply("Please specify someone you want to mute. **!mute <user> [time] [reason]**");
@@ -43,7 +43,7 @@ const unmute = async (interaction, memberPermissions) => {
 
     if (!memberPermissions.has(Permissions.FLAGS.MUTE_MEMBERS))
         return interaction.reply("You do not have permission to do that.");
-    const user = interaction.options.getUser('target');
+    const user = interaction.options.getUser('@');
     if (!user)
         return interaction.reply("Please specify someone you want to unmute. **!unmute <user> [reason]**");
     const target = interaction.member.guild.members.cache.get(user.id);
@@ -63,7 +63,7 @@ const warn = async (interaction, memberPermissions) => {
 
     if (!memberPermissions.has(Permissions.FLAGS.MUTE_MEMBERS))
         return interaction.reply("You do not have permission to do that.");
-    const user = interaction.options.getUser('target');
+    const user = interaction.options.getUser('@');
     if (!user)
         return interaction.reply("Please specify someone you want to warn. **!warn <user> [reason]**");
     const target = interaction.member.guild.members.cache.get(user.id);
@@ -112,7 +112,7 @@ const kick = async (interaction, memberPermissions) => {
 
     if (!memberPermissions.has("KICK_MEMBERS"))
         return interaction.reply("You do not have permission to do that.");
-    const user = interaction.options.getUser('target');
+    const user = interaction.options.getUser('@');
     if (!user)
         return interaction.reply("Please specify someone you want to kick. **!kick <user> [reason]**");
     if (user.id === interaction.user.id)
@@ -131,7 +131,7 @@ const ban = async (interaction, memberPermissions) => {
 
     if (!memberPermissions.has("BAN_MEMBERS"))
         return interaction.reply("You do not have permission to do that.");
-    const user = interaction.options.getUser('target');
+    const user = interaction.options.getUser('@');
     if (!user)
         return interaction.reply("Please specify someone you want to ban. **!ban <user> [reason]**");
     if (user.id === interaction.user.id)
