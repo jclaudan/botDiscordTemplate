@@ -1,6 +1,6 @@
 const { Client, Intents, MessageEmbed } = require('discord.js');
 const bot = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES], partials: ["MESSAGE", "USER", "REACTION"] });
-const warns = require("./warns.json");
+const warns = require("../db/warns.json");
 const fs = require('fs');
 const ms = require('ms');
 

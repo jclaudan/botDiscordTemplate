@@ -2,7 +2,7 @@ const {  MessageActionRow, MessageButton, MessageEmbed, Permissions } = require(
 const fs = require('fs');
 const ms = require('ms');
 
-const warns = require("../warns.json");
+const warns = require("../db/warns.json");
 
 const defaultTimeMute = (reason) => {
     if (reason === 'Level 0') {

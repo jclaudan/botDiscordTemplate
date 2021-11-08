@@ -2,10 +2,11 @@ FROM node:16-slim
 
 # Base dir /app
 WORKDIR /app
-COPY script.js .
+COPY ./src .
 COPY package.json .
+COPY ./db/warns.json .
 RUN npm install
 
-CMD [ "node", "script.js" ]
+CMD [ "npm", "start" ]
 # Expose the listening port of your app
 EXPOSE 8000
