@@ -1,8 +1,8 @@
 FROM node:16-slim
 
 # Base dir /app
-WORKDIR /app
-COPY ./src /app/src
+WORKDIR ./app
+COPY src/ ./src/
 COPY package.json .
 COPY ./db/warns.json .
 COPY .env .
