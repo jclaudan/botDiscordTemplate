@@ -12,7 +12,7 @@ const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.js');
 const { selectMenuRow, buttonMessage, embedMessage } = require('./utils.js');
 const { mute, unmute, warn, kick, ban, defaultTimeMute } = require('./memberManager.js');
-const warns = require("./db/warns.json");
+const warns = require("../db/warns.json");
 
 // Require the necessary discord.js classes
 // const { token } = require('./config.json');
