@@ -162,4 +162,5 @@ module.exports = {
     warn,
     kick,
     ban,
+    defaultTimeMute,
 }

@@ -12,6 +12,7 @@ const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.js');
 const { selectMenuRow, buttonMessage, embedMessage } = require('./utils.js');
 const { mute, unmute, warn, kick, ban } = require('./memberManager.js');
+const warns = require("./db/warns.json");
 
 // Require the necessary discord.js classes
 // const { token } = require('./config.json');
@@ -153,8 +154,9 @@ const ms = require('ms');
 //     bot.user.setActivity('Moderate', {type: 'LISTENING'});
 // });
 
-const defaultTimeMute = '30s';
 const manageMembers = async (message) => {
+    const defaultTimeMute = '30s';
+    // defaultTimeMute
     const isBotDirectMessageType = message.author.bot || message.channel.type === 'dm';
     if (isBotDirectMessageType)
         return;
@@ -169,98 +171,98 @@ const manageMembers = async (message) => {
     console.log(mutedroleid);
     const mutedrole = message.guild.roles.cache.get(mutedroleid);
 
-    //BAN COMMAND
-    //!ban @Member reason
-    if (cmd === `${prefix}ban`) {
-        if (!message.member.permissions.has("BAN_MEMBERS"))
-            return message.reply("You do not have permission to do that.");
-        const user = message.mentions.users.first();
-        if (!user)
-            return message.reply("Please specify someone you want to ban. **!ban <user> [reason]**");
-        if (user.id === message.author.id)
-            return message.reply("You cannot ban yourself.");
-        const reason = args.slice(1).join(" ");
-        message.guild.members.cache.get(user.id).ban({ reason: reason });
+    // //BAN COMMAND
+    // //!ban @Member reason
+    // if (cmd === `${prefix}ban`) {
+    //     if (!message.member.permissions.has("BAN_MEMBERS"))
+    //         return message.reply("You do not have permission to do that.");
+    //     const user = message.mentions.users.first();
+    //     if (!user)
+    //         return message.reply("Please specify someone you want to ban. **!ban <user> [reason]**");
+    //     if (user.id === message.author.id)
+    //         return message.reply("You cannot ban yourself.");
+    //     const reason = args.slice(1).join(" ");
+    //     message.guild.members.cache.get(user.id).ban({ reason: reason });
 
-        const banmessage = new MessageEmbed()
-            .setColor("#00aaaa")
-            .setDescription(`${user} has been banned. Reason: **${reason != "" ? reason : "-"}**`);
-        message.channel.send({ embeds: [banmessage] });
-    }
+    //     const banmessage = new MessageEmbed()
+    //         .setColor("#00aaaa")
+    //         .setDescription(`${user} has been banned. Reason: **${reason != "" ? reason : "-"}**`);
+    //     message.channel.send({ embeds: [banmessage] });
+    // }
 
-    //KICK COMMAND
-    //!kick @Member reason
-    if (cmd === `${prefix}kick`) {
-        if (!message.member.permissions.has("KICK_MEMBERS"))
-            return message.reply("You do not have permission to do that.");
-        const user = message.mentions.users.first();
-        if (!user)
-            return message.reply("Please specify someone you want to kick. **!kick <user> [reason]**");
-        if (user.id === message.author.id)
-            return message.reply("You cannot kick yourself.");
-        const reason = args.slice(1).join(" ");
-        message.guild.members.cache.get(user.id).kick(reason);
+    // //KICK COMMAND
+    // //!kick @Member reason
+    // if (cmd === `${prefix}kick`) {
+    //     if (!message.member.permissions.has("KICK_MEMBERS"))
+    //         return message.reply("You do not have permission to do that.");
+    //     const user = message.mentions.users.first();
+    //     if (!user)
+    //         return message.reply("Please specify someone you want to kick. **!kick <user> [reason]**");
+    //     if (user.id === message.author.id)
+    //         return message.reply("You cannot kick yourself.");
+    //     const reason = args.slice(1).join(" ");
+    //     message.guild.members.cache.get(user.id).kick(reason);
 
-        const kickmessage = new MessageEmbed()
-            .setColor("#00aaaa")
-            .setDescription(`${user} has been kicked. Reason: **${reason != "" ? reason : "-"}**`);
-        message.channel.send({ embeds: [kickmessage] });
-    }
+    //     const kickmessage = new MessageEmbed()
+    //         .setColor("#00aaaa")
+    //         .setDescription(`${user} has been kicked. Reason: **${reason != "" ? reason : "-"}**`);
+    //     message.channel.send({ embeds: [kickmessage] });
+    // }
 
     //MUTE COMMAND
     //!mute @Member time(s, m, d, h) reason
-    if (cmd === `${prefix}mute`) {
+    // if (cmd === `${prefix}mute`) {
 
-        if (!message.member.permissions.has(Permissions.FLAGS.MUTE_MEMBERS))
-            return message.reply("You do not have permission to do that.");
-        const user = message.mentions.users.first();
-        if (!user)
-            return message.reply("Please specify someone you want to mute. **!mute <user> [time] [reason]**");
-        const target = message.guild.members.cache.get(user.id);
+    //     if (!message.member.permissions.has(Permissions.FLAGS.MUTE_MEMBERS))
+    //         return message.reply("You do not have permission to do that.");
+    //     const user = message.mentions.users.first();
+    //     if (!user)
+    //         return message.reply("Please specify someone you want to mute. **!mute <user> [time] [reason]**");
+    //     const target = message.guild.members.cache.get(user.id);
 
-        const reason = args.slice(2).join(" ");
-        let time = args[1];
-        if (!time)
-            time = defaultTimeMute;
+    //     const reason = args.slice(2).join(" ");
+    //     let time = args[1];
+    //     if (!time)
+    //         time = defaultTimeMute;
 
-        const memberVoiceState = target.guild.voiceStates.cache.get(user.id)
-        await memberVoiceState.setMute(true, reason)
+    //     const memberVoiceState = target.guild.voiceStates.cache.get(user.id)
+    //     await memberVoiceState.setMute(true, reason)
 
-        const embed = new MessageEmbed()
-            .setColor("#00aaaa")
-            .setDescription(`${user} has been muted by ${message.author} for ${ms(ms(time))}.\nReason: **${reason != "" ? reason : "-"}**`);
+    //     const embed = new MessageEmbed()
+    //         .setColor("#00aaaa")
+    //         .setDescription(`${user} has been muted by ${message.author} for ${ms(ms(time))}.\nReason: **${reason != "" ? reason : "-"}**`);
 
-        message.channel.send({ embeds: [embed] });
+    //     message.channel.send({ embeds: [embed] });
 
-        setTimeout(async () => {
-            await memberVoiceState.setMute(false, reason)
-            const unmute = new MessageEmbed()
-                .setColor("#00aaaa")
-                .setDescription(`${user} has been unmuted.`);
-            message.channel.send({ embeds: [unmute] });
-        }, ms(time));
-    }
+    //     setTimeout(async () => {
+    //         await memberVoiceState.setMute(false, reason)
+    //         const unmute = new MessageEmbed()
+    //             .setColor("#00aaaa")
+    //             .setDescription(`${user} has been unmuted.`);
+    //         message.channel.send({ embeds: [unmute] });
+    //     }, ms(time));
+    // }
 
-    //UNMUTE COMMAND
-    //!unmute @Member reason
-    if (cmd === `${prefix}unmute`) {
-        if (!message.member.permissions.has(Permissions.FLAGS.MUTE_MEMBERS))
-            return message.reply("You do not have permission to do that.");
-        const user = message.mentions.users.first();
-        if (!user)
-            return message.reply("Please specify someone you want to unmute. **!unmute <user> [reason]**");
-        const target = message.guild.members.cache.get(user.id);
+    // //UNMUTE COMMAND
+    // //!unmute @Member reason
+    // if (cmd === `${prefix}unmute`) {
+    //     if (!message.member.permissions.has(Permissions.FLAGS.MUTE_MEMBERS))
+    //         return message.reply("You do not have permission to do that.");
+    //     const user = message.mentions.users.first();
+    //     if (!user)
+    //         return message.reply("Please specify someone you want to unmute. **!unmute <user> [reason]**");
+    //     const target = message.guild.members.cache.get(user.id);
 
-        const reason = args.slice(1).join(" ");
+    //     const reason = args.slice(1).join(" ");
 
-        const memberVoiceState = target.guild.voiceStates.cache.get(user.id)
-        await memberVoiceState.setMute(false, reason)
+    //     const memberVoiceState = target.guild.voiceStates.cache.get(user.id)
+    //     await memberVoiceState.setMute(false, reason)
 
-        const unmute = new MessageEmbed()
-            .setColor("#00aaaa")
-            .setDescription(`${user} has been unmuted by ${message.author}.\nReason: **${reason != "" ? reason : "-"}**`);
-        message.channel.send({ embeds: [unmute] });
-    }
+    //     const unmute = new MessageEmbed()
+    //         .setColor("#00aaaa")
+    //         .setDescription(`${user} has been unmuted by ${message.author}.\nReason: **${reason != "" ? reason : "-"}**`);
+    //     message.channel.send({ embeds: [unmute] });
+    // }
 
     //WARN COMMAND
     //!warn @Member reason
