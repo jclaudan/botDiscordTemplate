@@ -167,9 +167,9 @@ const manageMembers = async (message) => {
 
     //Your muted role id goes here.
     //You should deny the "SEND_MESSAGES" permission for this role.
-    const mutedroleid = (message.guild.roles.cache.find(role => role.name === "Moderator")).id;
-    console.log(mutedroleid);
-    const mutedrole = message.guild.roles.cache.get(mutedroleid);
+    // const mutedroleid = (message.guild.roles.cache.find(role => role.name === "Moderator")).id;
+    // console.log(mutedroleid);
+    // const mutedrole = message.guild.roles.cache.get(mutedroleid);
 
     // //BAN COMMAND
     // //!ban @Member reason
