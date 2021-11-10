@@ -11,7 +11,7 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { clientId, guildId, token } = require('./config.js');
 const { selectMenuRow, buttonMessage, embedMessage } = require('./utils.js');
-const { mute, unmute, warn, kick, ban } = require('./memberManager.js');
+const { mute, unmute, warn, kick, ban, defaultTimeMute } = require('./memberManager.js');
 const warns = require("./db/warns.json");
 
 // Require the necessary discord.js classes
@@ -104,7 +104,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 	.then(() => console.log('Successfully registered application commands.'))
 	.catch(console.error)
 
-    const defaultTimeMute = '30s';
+    // const defaultTimeMute = '30s';
 
     client.on('interactionCreate', async interaction => {
         if (!interaction.isCommand()) return;
@@ -155,7 +155,7 @@ const ms = require('ms');
 // });
 
 const manageMembers = async (message) => {
-    const defaultTimeMute = '30s';
+    // const defaultTimeMute = '30s';
     // defaultTimeMute
     const isBotDirectMessageType = message.author.bot || message.channel.type === 'dm';
     if (isBotDirectMessageType)
@@ -300,7 +300,7 @@ const manageMembers = async (message) => {
                     .setColor("#00aaaa")
                     .setDescription(`${user} has been unmuted.`);
                 message.channel.send({ embeds: [unmute] });
-            }, ms(defaultTimeMute));
+            }, ms(defaultTimeMute(reason)));
 
         } else {
             const warn = new MessageEmbed()
